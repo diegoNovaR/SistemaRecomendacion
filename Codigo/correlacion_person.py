@@ -1,8 +1,10 @@
+
+
 def correlacion_person(puntA, puntB):
     valores_A = []
     valores_B = []
     for llave in puntA:
-        if llave in puntB and puntB[llave] is not None and puntA[llave] is not None:
+        if llave in puntB and puntB[llave] == puntB[llave] and puntA[llave] == puntA[llave]:
             valores_A.append(puntA[llave])
             valores_B.append(puntB[llave])
     
