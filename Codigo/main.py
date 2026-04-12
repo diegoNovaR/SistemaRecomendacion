@@ -45,7 +45,7 @@ def main():
     usuarios_dict, mapeo_nombres = cargar_datos("ratings.csv", "movies.csv")
 
     user_id = 1  # Probamos con el usuario 1
-    k = 20       # Con 600 usuarios, podemos subir K a 10 o 20
+    k = 5       # Con 600 usuarios, podemos subir K a 10 o 20
 
     # 1. Encontrar vecinos (usando tu Knn.py y correlacion_person.py)
     vecinos = knn(user_id, usuarios_dict, k)
