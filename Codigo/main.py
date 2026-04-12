@@ -3,26 +3,30 @@ from Knn import knn
 
 def cargar_datos(ruta):
 
-    # 1. Cargamos el archivo
-    df = pd.read_csv(ruta, index_col=0)
+# Intentamos leer detectando el separador automáticamente
+    # engine='python' permite que sep=None funcione mejor
+    df = pd.read_csv(ruta, sep=None, engine='python', index_col=0)
     
-    # 2. Limpiamos espacios en blanco en los nombres de las columnas y el índice
-    df.columns = df.columns.str.strip()
+    # Limpiamos posibles espacios en blanco en los nombres de columnas y filas
     df.index = df.index.str.strip()
-    
-    # 3. Transponemos para que los usuarios sean las llaves principales
+    df.columns = df.columns.str.strip()
+
+    # Transponemos: Ahora las columnas (Angelica, Bill...) son las filas (Índice)
     df_transpuesto = df.transpose()
     
-    # 4. También limpiamos el índice después de transponer (por si acaso)
-    df_transpuesto.index = df_transpuesto.index.str.strip()
+    # Convertimos a diccionario
+    diccionario = df_transpuesto.to_dict(orient='index')
     
-    return df_transpuesto.to_dict(orient='index')
+    # Debug: Esto DEBE mostrar nombres ahora
+    print("Usuarios detectados:", list(diccionario.keys()))
+    
+    return diccionario
 
 def main():
 
     usuarios_dict = cargar_datos("DatasetEjemplo.csv")
     print("Usuarios detectados:", list(usuarios_dict.keys()))
-    usuario_objetivo = "Angelica"
+    usuario_objetivo = "Dan"
     k = 3
     print(f"Calculando vecinos para {usuario_objetivo}...")
 
