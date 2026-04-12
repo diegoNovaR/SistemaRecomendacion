@@ -1,2 +1,4 @@
-ratings.csv
 movies.csv
+ratings.csv
+__pycache__/
+*.py[cod]
