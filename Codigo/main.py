@@ -41,24 +41,24 @@ def cargar_datos(ruta_ratings, ruta_movies):
 
 def main():
 
-    usuarios_dict = cargar_datos("DatasetEjemplo.csv")
-    print("Usuarios detectados:", list(usuarios_dict.keys()))
-    usuario_objetivo = "Angelica"
-    k = 5
-    print(f"Calculando vecinos para {usuario_objetivo}...")
+    # usuarios_dict = cargar_datos("DatasetEjemplo.csv")
+    # print("Usuarios detectados:", list(usuarios_dict.keys()))
+    # usuario_objetivo = "Angelica"
+    # k = 5
+    # print(f"Calculando vecinos para {usuario_objetivo}...")
 
-    vecinos = knn(usuario_objetivo, usuarios_dict, k)
+    # vecinos = knn(usuario_objetivo, usuarios_dict, k)
 
-    print(f"\nLos {k} usuarios más parecidos a {usuario_objetivo} son:")
-    for nombre, score in vecinos:
-        print(f"- {nombre}: {score:.4f}")
-    #===========recomendacion=========#
+    # print(f"\nLos {k} usuarios más parecidos a {usuario_objetivo} son:")
+    # for nombre, score in vecinos:
+    #     print(f"- {nombre}: {score:.4f}")
+    # #===========recomendacion=========#
 
-    recomendaciones = recomendacion(usuario_objetivo, usuarios_dict, vecinos)
+    # recomendaciones = recomendacion(usuario_objetivo, usuarios_dict, vecinos)
     
-    print(f"\n las recomendaciones son:")
-    for artista, prediccion in recomendaciones:
-        print(f"- {artista}: {prediccion:.4f}")
+    # print(f"\n las recomendaciones son:")
+    # for artista, prediccion in recomendaciones:
+    #     print(f"- {artista}: {prediccion:.4f}")
 
 
 
