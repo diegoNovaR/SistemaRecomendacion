@@ -17,17 +17,14 @@ def cargar_datos(ruta):
     # Convertimos a diccionario
     diccionario = df_transpuesto.to_dict(orient='index')
     
-    # Debug: Esto DEBE mostrar nombres ahora
-    print("Usuarios detectados:", list(diccionario.keys()))
-    
     return diccionario
 
 def main():
 
     usuarios_dict = cargar_datos("DatasetEjemplo.csv")
     print("Usuarios detectados:", list(usuarios_dict.keys()))
-    usuario_objetivo = "Dan"
-    k = 3
+    usuario_objetivo = "Jordy"
+    k = 5
     print(f"Calculando vecinos para {usuario_objetivo}...")
 
     vecinos = knn(usuario_objetivo, usuarios_dict, k)

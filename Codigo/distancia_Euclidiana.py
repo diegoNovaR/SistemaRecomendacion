@@ -1,5 +1,5 @@
 
-def distancia_euclidiana(puntA, puntB):
+def distancia_euclidiana(puntA, puntB):#usuarios
 
     coincidencias = 0
     suma = 0

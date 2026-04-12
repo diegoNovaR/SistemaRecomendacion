@@ -10,6 +10,7 @@ def knn(user_id, all_users, k=2):
     for otro_id, perfil_otro in all_users.items():
         if otro_id != user_id:#comparamos si es el mismo usuario
             
+            #aqui deber[ia de cambiarse segun el metodo]
             similitud = correlacion_person(perfil_objetivo, perfil_otro)
             
             # Guardamos el ID y su puntaje

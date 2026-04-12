@@ -1,5 +1,3 @@
-
-
 def correlacion_person(puntA, puntB):
     valores_A = []
     valores_B = []
