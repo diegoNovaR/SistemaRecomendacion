@@ -1,5 +1,6 @@
 import pandas as pd 
 from Knn import knn
+from recomendacion import recomendacion
 
 def cargar_datos(ruta):
 
@@ -19,11 +20,14 @@ def cargar_datos(ruta):
     
     return diccionario
 
+
+
+
 def main():
 
     usuarios_dict = cargar_datos("DatasetEjemplo.csv")
     print("Usuarios detectados:", list(usuarios_dict.keys()))
-    usuario_objetivo = "Jordy"
+    usuario_objetivo = "Angelica"
     k = 5
     print(f"Calculando vecinos para {usuario_objetivo}...")
 
@@ -32,6 +36,15 @@ def main():
     print(f"\nLos {k} usuarios más parecidos a {usuario_objetivo} son:")
     for nombre, score in vecinos:
         print(f"- {nombre}: {score:.4f}")
+    #===========recomendacion=========#
+
+    recomendaciones = recomendacion(usuario_objetivo, usuarios_dict, vecinos)
+    
+    print(f"\n las recomendaciones son:")
+    for artista, prediccion in recomendaciones:
+        print(f"- {artista}: {prediccion:.4f}")
+
+
 
 if __name__ == "__main__":
     main()
