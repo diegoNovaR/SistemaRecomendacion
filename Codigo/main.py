@@ -41,6 +41,30 @@ def cargar_datos(ruta_ratings, ruta_movies):
 
 def main():
 
+    # Carga
+    usuarios_dict, mapeo_nombres = cargar_datos("ratings.csv", "movies.csv")
+
+    user_id = 1  # Probamos con el usuario 1
+    k = 20       # Con 600 usuarios, podemos subir K a 10 o 20
+
+    # 1. Encontrar vecinos (usando tu Knn.py y correlacion_person.py)
+    vecinos = knn(user_id, usuarios_dict, k)
+
+    print("vecinos mas cercanos")
+    for valId in vecinos:
+        print(f"{valId}")
+
+    # 2. Generar recomendaciones (usando tu recomendador.py)
+    # Importante: metrica_tipo='similitud' porque Pearson es similitud
+    propuestas = recomendacion(user_id, usuarios_dict, vecinos)
+
+    # 3. Mostrar resultados traducidos
+    print(f"\nRecomendaciones para el Usuario {user_id}:")
+    for movie_id, prediccion in propuestas[:10]: # Top 10
+        titulo = mapeo_nombres.get(movie_id, f"Desconocida (ID:{movie_id})")
+        print(f"- {titulo:50} | Predicción: {prediccion:.2f} estrellas")
+
+
     # usuarios_dict = cargar_datos("DatasetEjemplo.csv")
     # print("Usuarios detectados:", list(usuarios_dict.keys()))
     # usuario_objetivo = "Angelica"
