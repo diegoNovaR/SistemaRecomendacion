@@ -26,4 +26,4 @@ def cargar_movies(ruta="movies.csv"):
     df = pd.read_csv(ruta)
 
     # movieId -> title
-    return dict(zip(df["movieId"], df["title"]))
+    return df.set_index("movieId")[["title", "genres"]].to_dict("index")

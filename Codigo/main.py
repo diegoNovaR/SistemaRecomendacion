@@ -1,6 +1,6 @@
 import pandas as pd 
-from Knn import knn
-from recomendacion import recomendacion
+from Codigo.Knn import knn
+from Codigo.recomendacion import recomendacion
 
 def cargar_datos(ruta_ratings, ruta_movies):
     print("Cargando datos...")

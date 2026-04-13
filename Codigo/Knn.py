@@ -1,8 +1,8 @@
 
-from correlacion_person import correlacion_person
-from distancia_Euclidiana import distancia_euclidiana
-from similitud_Coseno import similitud_coseno
-from distancia_Manhattan import distancia_manhattan
+from Codigo.correlacion_person import correlacion_person
+from Codigo.distancia_Euclidiana import distancia_euclidiana
+from Codigo.similitud_Coseno import similitud_coseno
+from Codigo.distancia_Manhattan import distancia_manhattan
 
 def knn(user_id, all_users, k=2, metrica ='pearson'):
     distancias = []

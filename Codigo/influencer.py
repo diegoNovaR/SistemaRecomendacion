@@ -1,5 +1,5 @@
-from data_loader import cargar_all_users
-from Knn import knn
+from Codigo.data_loader import cargar_all_users
+from Codigo.Knn import knn
 import pandas as pd
 
 

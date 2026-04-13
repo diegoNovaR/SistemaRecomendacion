@@ -28,12 +28,12 @@ except ImportError:
 # MÓDULOS REALES DEL PROYECTO
 # ──────────────────────────────────────────────────────────────
 try:
-    from correlacion_person   import correlacion_person
-    from similitud_Coseno     import similitud_coseno
-    from distancia_Manhattan  import distancia_manhattan
-    from distancia_Euclidiana import distancia_euclidiana
-    from Knn                  import knn
-    from recomendacion        import recomendacion
+    from Codigo.correlacion_person   import correlacion_person
+    from Codigo.similitud_Coseno     import similitud_coseno
+    from Codigo.distancia_Manhattan  import distancia_manhattan
+    from Codigo.distancia_Euclidiana import distancia_euclidiana
+    from Codigo.Knn                  import knn
+    from Codigo.recomendacion        import recomendacion
     print("[OK] Módulos del proyecto importados.\n")
 except ImportError as e:
     print(f"[ERROR] {e}")
