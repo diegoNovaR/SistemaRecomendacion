@@ -1,4 +1,6 @@
 movies.csv
 ratings.csv
+escalabilidad.csv
 __pycache__/
 *.py[cod]
+

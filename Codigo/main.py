@@ -58,8 +58,8 @@ def main():
         metrica_elegida = menu_metricas()
         
         # Configuración de parámetros
-        k = int(input("¿Cuántos vecinos quieres considerar? (Sugerido 10-20): ") or 10)
-        min_v = int(input("Tolerancia mínima de vecinos que vieron la peli (Sugerido 3-5): ") or 3)
+        k = int(input("¿Cuántos vecinos quieres considerar que son similares que tú? (Sugerido 10-20): ") or 10)
+        min_v = int(input("Elige la cantidad de vecinos mínima que vieron la película (Sugerido 3-5): ") or 3)
 
         print(f"\nProcesando con {metrica_elegida}...")
 

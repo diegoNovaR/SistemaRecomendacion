@@ -35,7 +35,7 @@ def recomendacion(user_id, all_users, vecinos, min_vecinos, metrica):
     for artista, totales in recomendaciones.items():
         suma_ponderada, suma_pesos, conteo = totales
          
-        # Solo se agrega si el número de vecinos que la vieron >= min_vecinos
+        # Solo se agrega si el número de vecinos que la vieron >= min_vecinos (al mínimo de vecinos que vieron la película)
         if suma_pesos > 0 and conteo >= min_vecinos:
             prediccion = suma_ponderada / suma_pesos
             lista_final.append((artista, prediccion))
