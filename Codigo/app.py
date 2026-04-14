@@ -50,25 +50,25 @@ usuarios_dict, mapeo_nombres, tiempo_carga, ram_uso = load_data()
 st.sidebar.markdown("<h3><i class='fa-solid fa-sliders'></i> Configuración</h3>", unsafe_allow_html=True)
 
 user_id = st.sidebar.number_input(
-    "Usuario",
+    "Escribe el ID de usuario objetivo",
     min_value=1,
     max_value=max([k for k in usuarios_dict.keys() if isinstance(k, int)]),
     value=1
 )
 
 metrica = st.sidebar.selectbox(
-    "Métrica",
+    "Escoge la métrica",
     ["pearson", "coseno", "manhattan", "euclidiana"]
 )
 
-k = st.sidebar.slider("Vecinos", 5, 30, 10)
-min_v = st.sidebar.slider("Mín vecinos", 1, 10, 3)
+k = st.sidebar.slider("Elige el nro de vecinos (KNN)", 5, 30, 10)
+min_v = st.sidebar.slider("Mín vecinos que vieron la película", 1, 10, 3)
 
 # CONFIG INFLUENCER
 st.sidebar.markdown("<h4><i class='fa-solid fa-robot'></i> Influencer</h4>", unsafe_allow_html=True)
 
-top_populares = st.sidebar.slider("Películas populares", 10, 100, 20)
-num_no_vistos = st.sidebar.slider("No vistas a agregar", 1, 10, 3)
+top_populares = st.sidebar.slider("Nro de películas populares", 10, 100, 20)
+num_no_vistos = st.sidebar.slider("Nro de películas que se agregan al influencer", 1, 10, 3)
 
 # ==========================================
 # TAB 1 - RECOMENDADOR
