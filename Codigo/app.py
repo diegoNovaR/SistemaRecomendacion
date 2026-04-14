@@ -226,8 +226,8 @@ with tab2:
                 "Películas": len(nombres_tmp),
                 "Carga dataset (s)": round(tiempo_carga, 4),
                 "RAM usada (MB)": round(ram_usada, 2),
-                "Similitud (s)": round(t_knn, 4),
-                "Recomendación (s)": round(t_rec, 4),
+                "Tiempo para realizar el cálculo KNN (s)": round(t_knn, 4),
+                "Tiempo para realizar la recomendación (s)": round(t_rec, 4),
                 "Total (s)": round(tiempo_total, 4)
             }
 
