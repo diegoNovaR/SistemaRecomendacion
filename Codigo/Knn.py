@@ -1,4 +1,3 @@
-
 from correlacion_person import correlacion_person
 from distancia_Euclidiana import distancia_euclidiana
 from similitud_Coseno import similitud_coseno
