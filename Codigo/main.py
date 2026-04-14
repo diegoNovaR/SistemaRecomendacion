@@ -1,5 +1,6 @@
 import pandas as pd 
 from Knn import knn
+from incluencer import items_populares, items_no_vistos, crear_influencer
 from recomendacion import recomendacion
 
 def cargar_datos(ruta_ratings, ruta_movies):
@@ -83,6 +84,93 @@ def main():
                 titulo = mapeo_nombres.get(movie_id, f"Desconocida (ID:{movie_id})")
                 print(f"- {titulo[:50]:50} | Predicción: {prediccion:.2f} ★")
 
+        #4. prueba con influencer.
+        print("\n==========================================")
+        print("   CONFIGURAR USUARIO INFLUENCER")
+        print("==========================================")
+
+        top_populares = int(input("¿Cuántas películas populares analizar? (ej: 20): ") or 20)
+        num_no_vistos = int(input("¿Cuántas películas NO vistas agregar al influencer? (ej: 3): ") or 3)
+
+
+        # ==========================================
+        # CREAR INFLUENCER
+        # ==========================================
+
+        populares = items_populares(usuarios_dict, top_n=top_populares)
+        no_vistos_populares = items_no_vistos(user_id, usuarios_dict, populares)
+
+        # Control: si pide más de los disponibles
+        if num_no_vistos > len(no_vistos_populares):
+            num_no_vistos = len(no_vistos_populares)
+
+        nuevas_recomendaciones = no_vistos_populares[:num_no_vistos]
+
+        print("\nPelículas que el influencer agregará:")
+        for movie_id in nuevas_recomendaciones:
+            print("-", mapeo_nombres.get(movie_id, movie_id))
+
+        influencer = crear_influencer(user_id, usuarios_dict, nuevas_recomendaciones)
+
+        # Insertar influencer
+        usuarios_dict["influencer"] = influencer
+
+
+        # ==========================================
+        # PRUEBA CON INFLUENCER
+        # ==========================================
+
+        print("\n==========================================")
+        print("   RESULTADOS CON INFLUENCER")
+        print("==========================================")
+
+        vecinos_inf = knn(user_id, usuarios_dict, k, metrica=metrica_elegida)
+
+        print("\n--- Nuevos vecinos (con influencer) ---")
+        for id_vecino, score in vecinos_inf:
+            print(f"ID: {id_vecino:4} | Score: {score:.4f}")
+
+        propuestas_con = recomendacion(user_id, usuarios_dict, vecinos_inf, min_vecinos=min_v, metrica=metrica_elegida)
+
+        print(f"\nTop 10 recomendaciones CON influencer:")
+        for movie_id, prediccion in propuestas_con[:10]:
+            titulo = mapeo_nombres.get(movie_id, f"ID:{movie_id}")
+            print(f"- {titulo[:50]:50} | {prediccion:.2f} ★")
+
+
+        # ==========================================
+        # COMPARACIÓN AUTOMÁTICA
+        # ==========================================
+
+        print("\n==========================================")
+        print("   COMPARACIÓN")
+        print("==========================================")
+
+        top_sin = [x[0] for x in propuestas[:10]]
+        top_con = [x[0] for x in propuestas_con[:10]]
+
+        nuevas = set(top_con) - set(top_sin)
+
+        if nuevas:
+            print("\n🎯 Nuevas recomendaciones gracias al influencer:")
+            for movie_id in nuevas:
+                print("-", mapeo_nombres.get(movie_id, movie_id))
+        else:
+            print("\nNo hubo nuevas recomendaciones, pero puede haber cambios en ranking.")
+
+
+        print("\n📊 Cambios de ranking (TOP 10):")
+        ranking_sin = {item: i for i, item in enumerate(top_sin)}
+        ranking_con = {item: i for i, item in enumerate(top_con)}
+
+        for item in top_con:
+            if item in ranking_sin:
+                cambio = ranking_sin[item] - ranking_con[item]
+                if cambio != 0:
+                    print(f"- {mapeo_nombres.get(item,item)} | Cambio: {cambio}")
+
+
+        #====== final ===#
         continuar = input("\n¿Deseas realizar otra consulta? (s/n): ").lower()
         if continuar != 's':
             break
