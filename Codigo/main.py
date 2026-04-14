@@ -47,7 +47,8 @@ def main():
         print("==========================================")
         
         try:
-            user_id = int(input(f"\nIngresa el ID del usuario (1-{max(usuarios_dict.keys())}): "))
+            max_user_id = max(k for k in usuarios_dict.keys() if isinstance(k, int))
+            user_id = int(input(f"\nIngresa el ID del usuario (1-{max_user_id}): "))
             if user_id not in usuarios_dict:
                 print("Error: El ID de usuario no existe.")
                 continue
