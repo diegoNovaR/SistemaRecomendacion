@@ -14,7 +14,12 @@ def items_populares(all_users, top_n):
 
 #filtrar items que el usuario no miro
 def items_no_vistos(user_id, all_users, items):
-    vistos = set(all_users[user_id].keys())
+    # Solo considerar películas realmente vistas (rating válido)
+    vistos = set(
+        item for item, rating in all_users[user_id].items()
+        if rating == rating  # filtra NaN
+    )
+
     return [item for item in items if item not in vistos]
 
 #crear user influecen 

@@ -64,12 +64,20 @@ def main():
 
         print(f"\nProcesando con {metrica_elegida}...")
 
+        # ==========================================
+        # VECINOS
+        # ==========================================
+
         # 1. Encontrar vecinos
         vecinos = knn(user_id, usuarios_dict, k, metrica=metrica_elegida)
 
         print("\n--- Vecinos más cercanos encontrados ---")
         for id_vecino, score in vecinos:
             print(f"ID: {id_vecino:4} | Similitud/Distancia: {score:.4f}")
+        
+        # ==========================================
+        # RECOMENDACIONES SIN INFLUENCER
+        # ==========================================
 
         # 2. Generar recomendaciones
         # Pasamos la métrica para que el recomendador sepa si debe convertir distancia a peso
@@ -83,6 +91,10 @@ def main():
             for movie_id, prediccion in propuestas[:10]:
                 titulo = mapeo_nombres.get(movie_id, f"Desconocida (ID:{movie_id})")
                 print(f"- {titulo[:50]:50} | Predicción: {prediccion:.2f} ★")
+        
+        # ==========================================
+        # INFLUENCER
+        # ==========================================
 
         #4. prueba con influencer.
         print("\n==========================================")
@@ -97,12 +109,27 @@ def main():
         # CREAR INFLUENCER
         # ==========================================
 
+        # Obtener populares
         populares = items_populares(usuarios_dict, top_n=top_populares)
+
+        print(f"\n Top {top_populares} películas más populares:")
+        for i, movie_id in enumerate(populares, 1):
+            titulo = mapeo_nombres.get(movie_id, f"ID:{movie_id}")
+            print(f"{i:2}. {titulo}")
+
+        # Obtener no vistos
         no_vistos_populares = items_no_vistos(user_id, usuarios_dict, populares)
+
+        print(f"\n Películas populares que el usuario {user_id} NO ha visto:")
+        for i, movie_id in enumerate(no_vistos_populares, 1):
+            titulo = mapeo_nombres.get(movie_id, f"ID:{movie_id}")
+            print(f"{i:2}. {titulo}")
 
         # Control: si pide más de los disponibles
         if num_no_vistos > len(no_vistos_populares):
             num_no_vistos = len(no_vistos_populares)
+
+        print(f"\n Se seleccionarán {num_no_vistos} películas no vistas.")
 
         nuevas_recomendaciones = no_vistos_populares[:num_no_vistos]
 
@@ -152,14 +179,14 @@ def main():
         nuevas = set(top_con) - set(top_sin)
 
         if nuevas:
-            print("\n🎯 Nuevas recomendaciones gracias al influencer:")
+            print("\n Nuevas recomendaciones gracias al influencer:")
             for movie_id in nuevas:
                 print("-", mapeo_nombres.get(movie_id, movie_id))
         else:
-            print("\nNo hubo nuevas recomendaciones, pero puede haber cambios en ranking.")
+            print("\n No hubo nuevas recomendaciones, pero puede haber cambios en ranking.")
 
 
-        print("\n📊 Cambios de ranking (TOP 10):")
+        print("\n Cambios de ranking (TOP 10):")
         ranking_sin = {item: i for i, item in enumerate(top_sin)}
         ranking_con = {item: i for i, item in enumerate(top_con)}
 
