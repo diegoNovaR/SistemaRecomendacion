@@ -8,8 +8,8 @@ if __name__ == "__main__":
 
     print(len(majors_df))
     
-    print(majors_df.head(20))
-    print(majors_df.dtypes)
+    #print(majors_df.head(20))
+    #print(majors_df.dtypes)
 
     # # Convertir a diccionarios
     # names_dict = names_df.to_dict(orient="records")
@@ -20,5 +20,25 @@ if __name__ == "__main__":
 
     # print("\nMajors:")
     # print(majors_dict)
-    print(names_df.head(20))
-    print(names_df.dtypes)
+    #print(names_df.head(20))
+    #print(names_df.dtypes)
+
+    #print(names_df.info())
+    #print(majors_df.info())
+
+    #print(names_df['Role'].unique())
+    #print(names_df['Role'].value_counts().to_frame())
+
+    #print(majors_df['Majors'].unique())
+    #print(majors_df['Majors'].value_counts().to_frame())
+
+# 5 
+    print(names_df.describe())
+   
+    #print(names_df["Role"].unique())
+
+    #print(majors_df["Majors"].describe())
+    print(majors_df["Majors"].value_counts().head(10))
+
+
+
