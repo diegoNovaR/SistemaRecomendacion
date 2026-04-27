@@ -6,7 +6,6 @@ from distancia_Manhattan import distancia_manhattan
 def knn(user_id, all_users, k=2, metrica ='pearson'):
     distancias = []
     perfil_objetivo = all_users[user_id]
-
     # 1. Comparar contra todos
     # otroid es la llave del usuario y perfilOtro es el valor de las peliculas que valoro el user
     for otro_id, perfil_otro in all_users.items():
@@ -25,7 +24,6 @@ def knn(user_id, all_users, k=2, metrica ='pearson'):
                 raise ValueError("Métrica no reconocida")
 
             distancias.append((otro_id, puntaje))
-
     # 2. Lógica de ordenamiento diferenciada
     # Similitudes (Pearson/Coseno):  -> reverse=True
     # Distancias (Manhattan/Euclidiana):  -> reverse=False
