@@ -1,5 +1,7 @@
 from carga_datos import cargar_dataframes
-
+from barras import Barras
+from histograma import Histograma
+from boxplot import Boxplot
 
 if __name__ == "__main__":
     names_df, majors_df = cargar_dataframes()
@@ -38,7 +40,11 @@ if __name__ == "__main__":
     #print(names_df["Role"].unique())
 
     #print(majors_df["Majors"].describe())
+
     print(majors_df["Majors"].value_counts().head(10))
 
-
+#7 
+    Barras(majors_df)
+    Histograma(majors_df)
+    Boxplot(majors_df)
 
