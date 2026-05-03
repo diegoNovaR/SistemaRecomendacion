@@ -53,6 +53,13 @@ def load_clean(verbose: bool = True) -> dict[str, pd.DataFrame]:
             print(f"\n .head():")
             print(df.head().to_string())
 
+        print(f"\n Estadísticas rápidas:")
+        cols = ["count", "unique", "top", "mean", "min", "max"]
+        print(df.describe(include="all").T
+            .reindex(columns=cols)       # si alguna columna no existe, pone NaN
+            .dropna(how="all")
+            .to_string())
+
     return dfs
 
 
